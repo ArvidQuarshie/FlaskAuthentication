@@ -7,3 +7,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] =\
     sqlite:///+os.path.join(basedir,'data.sqlite')
 app.config['SQLAlCHEMY_COMMIT_ON_TEARDOWN'] = True
 db=SQLAlchemy(app)
+
+class Role(db.Model):
+    __tablename__='roles'
+    id=db.Column(db.Integer,primary_key=True)
+    name=db.Column(db.String(64),unique=True)
+
+    def __repr__(self):
+        return '<Role %r>' %self.name
+
+class User(db.Model):
+    __tablename__='users'
+
