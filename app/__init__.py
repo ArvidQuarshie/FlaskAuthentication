@@ -1,8 +1,7 @@
-from flask.ext.login import Logimanager
+#blueprint attachment
 
-login_manager=LoginManager()
-login_manager.login_view='auth.login'
-
-def create app(config_name):
-
-login_manager.init_app(app)
+def create_app(config.name):
+#...
+from auth import auth as auth_blueprint
+app.register_blueprint(auth_blueprint,url_prefix='/auth')
+return app
