@@ -68,4 +68,19 @@ def register():
     flash('A confirmation email that has been sent to you by email')
     return redirect(url_for(('main.index'))
    return render_template('auth/register.html', form=form)
+#confirm a user account
+
+from flask.ext.login import current_user
+
+@auth.route('/confirm/<token>')
+@login_required
+
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for('main.index'))
+    if current_user.confirm(token):
+        flash("You have confirmed your Account Thanks!!")
+    else:
+        flash('The confirmation link is invalid or has expired')
+    return redirect(url_for('main.index'))
 
