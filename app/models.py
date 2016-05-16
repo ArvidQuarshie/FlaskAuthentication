@@ -55,7 +55,14 @@ def generate_confirmation_token(self,expiration=3600)
 def confirm(self,token):
     s=Serializer(current_app.config['SECRET_KEY'])
     try:
-    
+    data=s.loads(token)
+    except:
+        return false
+    if data.get('confirm')
+        return False
+    self.confirmed=True
+    db.session.add(self)
+    return True
 
     
 
