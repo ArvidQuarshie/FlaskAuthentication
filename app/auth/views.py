@@ -36,4 +36,17 @@ from flask.ext.login import logout_user, login_required
 
 def logout():
     logout_user()
-    flash("YOu have been logged out ")
+    flash("You have been logged out ")
+    return redirect(url_for('main.index'))
+
+#User Registration Route
+
+@auth.route('/register',methods=['GET','POST'])
+def register():
+    form=RegisterForm()
+    if form.validate_on_submit():
+        user=User(email=form.email.data,username=form.username.data,password=form.password.data)
+    db.session.add(user)
+    flash("You can now log in")
+    return redirect(url_for('auth.login'))
+return render_template('auth/register.html' form=form)
