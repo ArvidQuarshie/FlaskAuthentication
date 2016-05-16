@@ -27,7 +27,21 @@ class User(db.Model):
     def verify_password(self,password):
         return check_password_hash(self.password_hash,password)
 
+#User Loader call back function
+#login manager provides a level of security
+
+from . import login_manager
+
+@login_manager.user_loader
+
+def load_user(user_id):
+    return User.query.get(int(user_id))
         
+
+#User Account Confirmation
+
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+
 
 
 
