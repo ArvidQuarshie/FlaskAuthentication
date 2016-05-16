@@ -10,4 +10,9 @@ class RegistrationForm(Form)
 'Usernames must have only letters, '
 'numbers, dots or underscores')])
     password=PasswordFiels('password', validators=[Required(), EqualTo('password2',message='Passwords must match')])
-   
+    password2=PasswordField('Confirm Password' validators=[Required()])
+    submit=submitField('Register')
+
+def validate_email(self,field):
+    if User.query.filter_by(email=field_data).first()
+        raise ValidationError('Email Already Registered')
